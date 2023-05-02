@@ -2,6 +2,7 @@ import json
 import sys
 import random
 import psycopg2
+from db_commands import address_insert, address_selection
 host = user = password = db_name = port = ''
 region = ['Київська', 'Житомирська', 'Херсонська', 'Львівська', 'Запорізька']
 settlement = []
@@ -53,11 +54,22 @@ def randomizer(street_prefix, street_file, settlement_file, region):
 {random.choice(region)} область, \
 {random.choice(settlement_file)}, \
 {random.choice(street_prefix)} \
-{random.choice(street_file)} \
+{random.choice(street_file)}, \
 {random.randint(1,150)}, \
 {str(random.randint(0,99999)).zfill(5)}\
 '
 
-for i in range(10):
-    print(randomizer(street_prefix, street_file, settlement_file, region))
+connection = psycopg2.connect(host=host, user=user, password=password, dbname=db_name, port=port)
+connection.autocommit = True
+
+for i in range(20):
+    address_to_db = randomizer(street_prefix, street_file, settlement_file, region)
+    print(address_to_db)
+    address_to_db = address_to_db.split(', ')
+    address_insert(connection, *address_to_db)
+
+    #print(address_select)
+
+if connection:
+    connection.close()
 
