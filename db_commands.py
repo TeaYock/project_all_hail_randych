@@ -30,3 +30,4 @@ def address_selection(connection, region='', settlement='', street='', house='',
         )
         all_addresses = cursor.fetchall()
         return all_addresses
+

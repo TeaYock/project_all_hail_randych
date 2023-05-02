@@ -3,6 +3,7 @@ import sys
 import random
 import psycopg2
 from db_commands import address_insert, address_selection
+
 host = user = password = db_name = port = ''
 region = ['Київська', 'Житомирська', 'Херсонська', 'Львівська', 'Запорізька']
 settlement = []
@@ -68,7 +69,6 @@ for i in range(20):
     address_to_db = address_to_db.split(', ')
     address_insert(connection, *address_to_db)
 
-    #print(address_select)
 
 if connection:
     connection.close()

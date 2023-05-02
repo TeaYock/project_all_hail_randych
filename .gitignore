@@ -1,4 +1,9 @@
 .idea
 __pycache__/
-Testicula.py
 env
+filesToRead
+.env
+bd_command.py
+tasker.py
+Testicula.py
+
