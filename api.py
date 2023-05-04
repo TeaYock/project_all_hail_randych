@@ -24,7 +24,7 @@ def addresses():
     connection.autocommit = True
     selected_addresses = address_selection(connection, region, settlement, street, house, post_code)
     connection.close()
-    return jsonify(selected_addresses)
+    return json.dumps(selected_addresses, ensure_ascii=False).encode('utf8')
 
 if __name__ == '__main__':
     app.run(debug=True)
