@@ -1,0 +1,7 @@
+.idea
+__pycache__/
+filesToRead
+.env
+bd_command.py
+tasker.py
+Testicula.py
