@@ -69,7 +69,6 @@ for i in range(20):
     address_to_db = address_to_db.split(', ')
     address_insert(connection, *address_to_db)
 
-
 if connection:
     connection.close()
 
