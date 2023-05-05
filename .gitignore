@@ -1,9 +1,5 @@
 .idea
 __pycache__/
-<<<<<<< HEAD
-env
-=======
->>>>>>> origin/api
 filesToRead
 .env
 bd_command.py
