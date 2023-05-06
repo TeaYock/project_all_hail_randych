@@ -20,7 +20,7 @@ model_sushchnosti = namespace.model('One Address', {
     ),
     'street': fields.String(
         required=True,
-        description='street in ukrainian settelement'
+        description='street in Ukrainian settelement'
     ),
     'house': fields.String(
         required=True,
