@@ -3,7 +3,12 @@ from db_commands import address_selection
 import json
 import psycopg2
 
+
 app = Flask(__name__)
+
+from flask import Blueprint
+blueprint = Blueprint('swaggerAPI', __name__, url_prefix='/swaggerAPI')
+
 app.config['JSON_AS_ASCII'] = False
 app.config['JSON_SORT_KEYS'] = False
 host = user = password = db_name = port = ''

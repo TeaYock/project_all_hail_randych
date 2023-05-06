@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_restx import Api
-from swagger.select_swagger import namespace as db_selector
+from select_swagger import namespace as db_selector
 
 blueprint = Blueprint('swagger', __name__, url_prefix='/swagger')
 

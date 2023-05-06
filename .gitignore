@@ -2,6 +2,7 @@
 __pycache__/
 filesToRead
 .env
+blueprints
 bd_command.py
 tasker.py
 Testicula.py
