@@ -28,7 +28,7 @@ def addresses():
     if re.match("^[а-яА-ЯіІїЇёЁ0-9.\s]+$", house) == False:
         return json.dumps('[Address not valid]').encode('utf8')
     post_code = request.args.get('post_code', '')
-    if re.match("^[0-9]{5}$", post_code) == False:
+    if re.match("^[0-9]{,5}$", post_code) == False:
         return json.dumps('[Address not valid]').encode('utf8')
 
     connection = psycopg2.connect(host=host, user=user, password=password, dbname=db_name, port=port)
