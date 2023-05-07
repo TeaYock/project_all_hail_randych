@@ -14,7 +14,7 @@ services:
     ports:
     - "5432:5432"
     environment:
-    - POSTGRES_DB=mail_Address_Analyzer_Data_Base
+    - POSTGRES_DB=randych_db
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=zadowbalo55
     volumes:
