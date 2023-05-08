@@ -3,6 +3,7 @@ __pycache__/
 filesToRead
 .env
 blueprints
+db_dumps
 bd_command.py
 tasker.py
 Testicula.py
