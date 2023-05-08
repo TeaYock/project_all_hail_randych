@@ -1,6 +1,7 @@
 FROM python:3.12-rc-slim-bullseye
 COPY ["swagger/", ".env", "api.py", "db_commands.py", "file_reader.py", "filesToRead/"]
 COPY requirements.txt /app/
+COPY ./db_dumps/randych_db.sql /docker-entrypoint-initdb.d/
 ADD . app/
 WORKDIR /app
 RUN apt update && apt install libpq-dev postgresql gcc -y

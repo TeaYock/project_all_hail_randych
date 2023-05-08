@@ -6,7 +6,7 @@ services:
     links:
     - postgres
     ports:
-    - "80:80"
+    - "5000:5000"
     depends_on:
     - postgres
   postgres:
@@ -18,7 +18,7 @@ services:
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=zadowbalo55
     volumes:
-      - db:/var/lib/postgresql/data
+      - ./mydb.sql:/docker-entrypoint-initdb.d/mydb.sql
 volumes:
   db:
     driver: local
