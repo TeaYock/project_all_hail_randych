@@ -18,7 +18,4 @@ services:
     - POSTGRES_USER=postgres
     - POSTGRES_PASSWORD=zadowbalo55
     volumes:
-      - ./mydb.sql:/docker-entrypoint-initdb.d/mydb.sql
-volumes:
-  db:
-    driver: local
+      - ./randych_db.sql:/docker-entrypoint-initdb.d/randych_db.sql
