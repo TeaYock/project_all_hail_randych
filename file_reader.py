@@ -12,7 +12,7 @@ street = []
 street_file = []
 house = []
 postal_code = ''
-with open('.env') as dotenv:
+with open('db_variables') as dotenv:
     dotenv = json.load(dotenv)
     for k,v in dotenv.items():
         globals()[k] = v

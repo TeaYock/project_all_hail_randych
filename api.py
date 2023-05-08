@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 app.config['JSON_SORT_KEYS'] = False
 host = user = password = db_name = port = ''
-with open('.env') as db_info:
+with open('db_variables') as db_info:
     db_info = json.load(db_info)
     for k, v in db_info.items():
         globals()[k] = v

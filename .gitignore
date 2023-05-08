@@ -1,7 +1,7 @@
 .idea
 __pycache__/
 filesToRead
-.env
+db_variables
 blueprints
 db_dumps
 bd_command.py
