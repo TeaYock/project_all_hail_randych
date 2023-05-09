@@ -13,4 +13,4 @@ RUN apt-get update && \
         python3-dev
 RUN pip install -r requirements.txt
 RUN apt -y autoremove
-CMD python api.py & python swagger/swagger.py
+CMD python api.py
