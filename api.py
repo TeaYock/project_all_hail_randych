@@ -38,4 +38,4 @@ def addresses():
     return json.dumps(selected_addresses, ensure_ascii=False).encode('utf8')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')

@@ -11,6 +11,6 @@ RUN apt-get update && \
         python3-dev
 RUN pip install -r requirements.txt
 RUN apt -y autoremove
-COPY swagger/ db_variables api.py db_commands.py file_reader.py filesToRead/ /app/
+COPY swagger/ db_variables api.py db_commands.py api.py file_reader.py filesToRead/ /app/
 ADD . app/
 CMD python api.py
