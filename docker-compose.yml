@@ -1,22 +1,18 @@
 version: "3.9"
 services:
-  python:
+  db:
+    build:
+      dockerfile: Dockerfile-2
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: zadowbalo55
+      POSTGRES_DB: randych_db
+    ports:
+      - "5432:5432"
+  python_api:
     build:
       dockerfile: Dockerfile
-    links:
-    - postgres
     ports:
-    - "5000:5000"
+      - "5000:5000"
     depends_on:
-    - postgres
-  postgres:
-    image: "postgres:15.1-alpine"
-    ports:
-    - "5432:5432"
-    environment:
-    - POSTGRES_DB=randych_db
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=zadowbalo55
-    volumes:
-    - .:/docker-entrypoint-initdb.d/randych_db.sql
-    - .:/var/lib/postgresql/data
+      - db
