@@ -7,15 +7,28 @@
 <body>
   <h1>Address provider</h1>
   <form>
-    <label for="region">Write the address:</label>
-    <div class="input-container">
+    <div class="form-group">
+      <label for="region">Region:</label>
       <input type="text" id="region" name="region">
-      <input type="text" id="settlement" name="settlement">
-      <input type="text" id="street" name="street">
-      <input type="text" id="house" name="house">
-      <input type="text" id="post_code" name="post_code">
-      <input type="submit" value="Отправить" class="submit-button">
     </div>
+    <div class="form-group">
+      <label for="settlement">Settlement:</label>
+      <input type="text" id="settlement" name="settlement">
+    </div>
+    <div class="form-group">
+      <label for="street">Street:</label>
+      <input type="text" id="street" name="street">
+    </div>
+    <div class="form-group">
+      <label for="house">House:</label>
+      <input type="text" id="house" name="house">
+    </div>
+    <div class="form-group">
+      <label for="post_code">Post Code:</label>
+      <input type="text" id="post_code" name="post_code">
+    </div>
+    <input type="submit" value="Submit" class="submit-button">
   </form>
 </body>
 </html>
+
