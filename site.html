@@ -53,10 +53,22 @@
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
-        // Display the response in the container
-        responseContainer.textContent = JSON.stringify(data);
-      })
+          // Clear previous response
+          responseContainer.innerHTML = "";
 
+          // Iterate through each address entry
+          data.forEach((entry) => {
+            // Create a new paragraph element for each entry
+            const paragraph = document.createElement("p");
+
+            // Format the entry and set it as the paragraph's text content
+            const formattedEntry = entry.join(", ");
+            paragraph.textContent = formattedEntry;
+
+            // Append the paragraph to the response container
+            responseContainer.appendChild(paragraph);
+          });
+        })
         .catch((error) => {
           console.error(error);
           responseContainer.textContent = "An error occurred.";
@@ -65,3 +77,6 @@
   </script>
 </body>
 </html>
+
+
+
