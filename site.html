@@ -3,38 +3,48 @@
 <head>
   <title>Address provider</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    .address-container {
+      height: 200px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 5px;
+    }
+  </style>
 </head>
 <body>
   <h1>Address provider</h1>
-  <form id="address-form">
-    <div class="form-group">
-      <label for="region">Region:</label>
-      <input type="text" id="region" name="region">
-    </div>
-    <div class="form-group">
-      <label for="settlement">Settlement:</label>
-      <input type="text" id="settlement" name="settlement">
-    </div>
-    <div class="form-group">
-      <label for="street">Street:</label>
-      <input type="text" id="street" name="street">
-    </div>
-    <div class="form-group">
-      <label for="house">House:</label>
-      <input type="text" id="house" name="house">
-    </div>
-    <div class="form-group">
-      <label for="post_code">Post Code:</label>
-      <input type="text" id="post_code" name="post_code">
-    </div>
-    <input type="submit" value="Submit" class="submit-button">
-  </form>
+  <div class="container">
+    <form id="address-form">
+      <div class="form-group">
+        <label for="region">Region:</label>
+        <input type="text" id="region" name="region">
+      </div>
+      <div class="form-group">
+        <label for="settlement">Settlement:</label>
+        <input type="text" id="settlement" name="settlement">
+      </div>
+      <div class="form-group">
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="street">
+      </div>
+      <div class="form-group">
+        <label for="house">House:</label>
+        <input type="text" id="house" name="house">
+      </div>
+      <div class="form-group">
+        <label for="post_code">Post Code:</label>
+        <input type="text" id="post_code" name="post_code">
+      </div>
+      <input type="submit" value="Submit" class="submit-button">
+    </form>
 
-  <div id="response-container"></div>
+    <div class="address-container" id="address-container"></div>
+  </div>
 
   <script>
     const form = document.getElementById("address-form");
-    const responseContainer = document.getElementById("response-container");
+    const addressContainer = document.getElementById("address-container");
 
     form.addEventListener("submit", (event) => {
       event.preventDefault(); // Prevent form submission
@@ -53,8 +63,8 @@
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
-          // Clear previous response
-          responseContainer.innerHTML = "";
+          // Clear previous addresses
+          addressContainer.innerHTML = "";
 
           // Iterate through each address entry
           data.forEach((entry) => {
@@ -65,18 +75,19 @@
             const formattedEntry = entry.join(", ");
             paragraph.textContent = formattedEntry;
 
-            // Append the paragraph to the response container
-            responseContainer.appendChild(paragraph);
+            // Append the paragraph to the address container
+            addressContainer.appendChild(paragraph);
           });
         })
         .catch((error) => {
           console.error(error);
-          responseContainer.textContent = "An error occurred.";
+          addressContainer.textContent = "An error occurred.";
         });
     });
   </script>
 </body>
 </html>
+
 
 
 
