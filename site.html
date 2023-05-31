@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>Address provider</h1>
-  <form>
+  <form id="address-form">
     <div class="form-group">
       <label for="region">Region:</label>
       <input type="text" id="region" name="region">
@@ -29,6 +29,39 @@
     </div>
     <input type="submit" value="Submit" class="submit-button">
   </form>
+
+  <div id="response-container"></div>
+
+  <script>
+    const form = document.getElementById("address-form");
+    const responseContainer = document.getElementById("response-container");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault(); // Prevent form submission
+
+      // Get form field values
+      const region = document.getElementById("region").value;
+      const settlement = document.getElementById("settlement").value;
+      const street = document.getElementById("street").value;
+      const house = document.getElementById("house").value;
+      const postCode = document.getElementById("post_code").value;
+
+      // Construct the URL with form field values
+      const url = `http://localhost:5000/addresses?region=${region}&settlement=${settlement}&street=${street}&house=${house}&post_code=${postCode}`;
+
+      // Send GET request
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+        // Display the response in the container
+        responseContainer.textContent = JSON.stringify(data);
+      })
+
+        .catch((error) => {
+          console.error(error);
+          responseContainer.textContent = "An error occurred.";
+        });
+    });
+  </script>
 </body>
 </html>
-

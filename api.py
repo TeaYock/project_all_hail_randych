@@ -1,10 +1,13 @@
+import flask
 from flask import Flask, request, jsonify
 from db_commands import address_selection
+from flask_cors import CORS
 import json
 import re
 import psycopg2
 
 app = Flask(__name__)
+CORS(app)
 app.config['JSON_AS_ASCII'] = False
 app.config['JSON_SORT_KEYS'] = False
 host = user = password = db_name = port = ''
@@ -35,7 +38,11 @@ def addresses():
     connection.autocommit = True
     selected_addresses = address_selection(connection, region, settlement, street, house, post_code)
     connection.close()
-    return json.dumps(selected_addresses, ensure_ascii=False).encode('utf8')
+    #flask.Response
+    #return json.dumps(selected_addresses, ensure_ascii=False).encode('utf8')
+    resp = flask.Response(json.dumps(selected_addresses, ensure_ascii=False).encode('utf8'))
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
