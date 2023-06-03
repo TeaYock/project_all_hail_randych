@@ -18,3 +18,8 @@ services:
       - "5000:5000"
     depends_on:
       - db
+  front-site:
+    build:
+      dockerfile: Dockerfile-3
+    ports:
+      - "8080:80"
