@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  db:
+    image: teateatea/all-hail-randych:v3
+    container_name: db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: zadowbalo55
+      POSTGRES_DB: randych_db
+    ports:
+      - "5432:5432"
+  python_api:
+    image: teateatea/all-hail-randych:v1
+    container_name: python_api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+  front-site:
+    image: teateatea/all-hail-randych:v2
+    ports:
+      - "8080:80"

@@ -68,31 +68,42 @@
       const postCode = document.getElementById("post_code").value;
 
       // Construct the URL with form field values
-      const url = `http://localhost:5000/addresses?region=${region}&settlement=${settlement}&street=${street}&house=${house}&post_code=${postCode}`;
+      const url = `http://34.118.81.1:5000/addresses?region=${region}&settlement=${settlement}&street=${street}&house=${house}&post_code=${postCode}`;
 
       // Send GET request
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
-          // Clear previous addresses
+          // Clear previous addresses and error messages
           addressContainer.innerHTML = "";
 
-          // Iterate through each address entry
-          data.forEach((entry) => {
-            // Create a new paragraph element for each entry
-            const paragraph = document.createElement("p");
+          // Check if API returned an error message
+          if (data.length === 1 && data[0] === "Address not valid") {
+            const errorMessage = document.createElement("p");
+            errorMessage.textContent = "Address not valid";
+            addressContainer.appendChild(errorMessage);
+          } else if (data.length === 1 && data[0] === "No such address") {
+            const noAddressMessage = document.createElement("p");
+            noAddressMessage.textContent = "No such address";
+            addressContainer.appendChild(noAddressMessage);
+          } else {
+            // Iterate through each address entry
+            data.forEach((entry) => {
+              // Create a new paragraph element for each entry
+              const paragraph = document.createElement("p");
 
-            // Format the entry and set it as the paragraph's text content
-            const formattedEntry = entry.join(", ");
-            paragraph.textContent = formattedEntry;
+              // Format the entry and set it as the paragraph's text content
+              const formattedEntry = entry.join(", ");
+              paragraph.textContent = formattedEntry;
 
-            // Append the paragraph to the address container
-            addressContainer.appendChild(paragraph);
-          });
+              // Append the paragraph to the address container
+              addressContainer.appendChild(paragraph);
+            });
+          }
         })
         .catch((error) => {
           console.error(error);
-          addressContainer.textContent = "An error occurred.";
+          addressContainer.textContent = "Error: Failed to fetch data.";
         });
     });
   </script>

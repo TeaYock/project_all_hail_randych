@@ -19,27 +19,31 @@ with open('db_variables') as db_info:
 @app.route('/addresses')
 def addresses():
     region = request.args.get('region', '')
-    if re.match("^[а-яА-ЯіІїЇёЁ ]+$", region) == False:
-        return json.dumps('[Address not valid]').encode('utf8')
     settlement = request.args.get('settlement', '')
-    if re.match("^[а-яА-ЯіІїЇёЁ]+$", settlement) == False:
-        return json.dumps('[Address not valid]').encode('utf8')
     street = request.args.get('street', '')
-    if re.match("^[а-яА-ЯіІїЇёЁ0-9. ]+$", street) == False:
-        return json.dumps('[Address not valid]').encode('utf8')
     house = request.args.get('house', '')
-    if re.match("^[а-яА-ЯіІїЇёЁ0-9. ]+$", house) == False:
-        return json.dumps('[Address not valid]').encode('utf8')
     post_code = request.args.get('post_code', '')
-    if re.match("^[0-9]{5}$", post_code) == False:
-        return json.dumps('[Address not valid]').encode('utf8')
+
+    error_validation_message = [('Address not valid')]
+
+    if region != '' and re.match("^[а-яА-ЯіІїЇёЁ ]+$", region) is None:
+        return json.dumps(error_validation_message).encode('utf8')
+    if settlement != '' and re.match("^[а-яА-ЯіІїЇёЁ ]+$", settlement) is None:
+        return json.dumps(error_validation_message).encode('utf8')
+    if street != '' and re.match("^[а-яА-ЯіІїЇёЁ0-9. ]+$", street) is None:
+        return json.dumps(error_validation_message).encode('utf8')
+    if house != '' and re.match("^[а-яА-ЯіІїЇёЁ0-9. ]+$", house) is None:
+        return json.dumps(error_validation_message).encode('utf8')
+    if post_code != '' and re.match("^[0-9]{0,5}$", post_code) is None:
+        return json.dumps(error_validation_message).encode('utf8')
 
     connection = psycopg2.connect(host=host, user=user, password=password, dbname=db_name, port=port)
     connection.autocommit = True
     selected_addresses = address_selection(connection, region, settlement, street, house, post_code)
     connection.close()
-    #flask.Response
-    #return json.dumps(selected_addresses, ensure_ascii=False).encode('utf8')
+    if selected_addresses == []:
+        no_address_messege = [('No such address')]
+        return json.dumps(no_address_messege).encode('utf8')
     resp = flask.Response(json.dumps(selected_addresses, ensure_ascii=False).encode('utf8'))
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
